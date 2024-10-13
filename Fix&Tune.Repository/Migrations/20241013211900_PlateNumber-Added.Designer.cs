@@ -4,6 +4,7 @@ using Fix_Tune.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fix_Tune.Repository.Migrations
 {
     [DbContext(typeof(FixTuneDbContext))]
-    partial class FixTuneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241013211900_PlateNumber-Added")]
+    partial class PlateNumberAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
