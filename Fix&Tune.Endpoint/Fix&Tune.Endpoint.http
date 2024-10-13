@@ -1,0 +1,6 @@
+@Fix_Tune.Endpoint_HostAddress = http://localhost:5269
+
+GET {{Fix_Tune.Endpoint_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
