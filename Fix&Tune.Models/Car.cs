@@ -14,7 +14,12 @@ namespace Fix_Tune.Models
         public string Brand { get; set; }
         [Required]
         public string Type { get; set; }
-        
+        [Required]
+        public int Year { get; set; }
+
+        [Required]
+        public string PlateNumber { get; set; }
+
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
