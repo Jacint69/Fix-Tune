@@ -19,6 +19,7 @@ namespace Fix_Tune.Models
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 
+        [JsonIgnore]
         public virtual User User { get; set; } 
 
         [JsonIgnore]
