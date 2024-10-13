@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Fix_Tune.Models
 {
     [Table("CarIssues")]
-    internal class CarIssue
+    public class CarIssue
     {
         public int CarIssueId {  get; set; }
 
