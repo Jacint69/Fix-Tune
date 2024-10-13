@@ -54,11 +54,13 @@ namespace Fix_Tune.Repository
 
             builder.Entity<Car>().HasData(new Car()
             {
-                CarId=1,
+                CarId=2,
                 Brand = "VW",
                 Type = "Golf 4",
                 UserId = "admin",
-                Issues = null
+                Issues = null,
+                Year=2002,
+                PlateNumber="ABB-222"
             }) ;
 
             //Cars <--> Issue N:N CarIssue 
