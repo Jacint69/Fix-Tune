@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fix_Tune.Repository.Migrations
 {
     [DbContext(typeof(FixTuneDbContext))]
-    [Migration("20241013160718_Initial")]
+    [Migration("20241013172333_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -50,6 +50,15 @@ namespace Fix_Tune.Repository.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            CarId = 1,
+                            Brand = "VW",
+                            Type = "Golf 4",
+                            UserId = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Fix_Tune.Models.CarIssue", b =>
@@ -175,9 +184,9 @@ namespace Fix_Tune.Repository.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d1fa67dd-c0e1-4680-910b-d76e4130b3a7",
+                            Id = "admin",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b1281e5-74e4-4ee4-be62-b3b4012f3515",
+                            ConcurrencyStamp = "ff91ced7-2c7c-4ef4-bb00-f7018e832dd6",
                             DateOfRegistration = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "kovacs.jacint02@gmail.com",
                             EmailConfirmed = false,
@@ -185,9 +194,9 @@ namespace Fix_Tune.Repository.Migrations
                             LastName = "Jácint",
                             LockoutEnabled = false,
                             NormalizedUserName = "Jaco",
-                            PasswordHash = "AQAAAAIAAYagAAAAEASk1qiAeuZqSANbsZ2+iiCfwFiTFXX7RKotWQgV6DZrISwoSqui7Sho1fLzON2foQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAn/+u+3IUjAH0gaspzhPm2dmJgVpZij8p8S1P5H1ONnyDg/cVKCb7VCtiqAZF/+jg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "86b27669-4db1-4c0a-a437-7a8afd6b2d6c",
+                            SecurityStamp = "2f6437fa-10a6-4401-9253-3e7f8657d7c3",
                             TwoFactorEnabled = false,
                             UserName = "Jaco"
                         });
