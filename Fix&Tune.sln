@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fix&Tune.Logic", "Fix&Tune.Logic\Fix&Tune.Logic.csproj", "{9822BF84-01D2-40A4-81D5-8DD5FEFC0D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fix&Tune.Models", "Fix&Tune.Logic\Fix&Tune.Models.csproj", "{9822BF84-01D2-40A4-81D5-8DD5FEFC0D6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5F3F18ED-BCDB-47BB-9368-DA9ECDA0081F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fix&Tune.Repository", "Fix&Tune.Repository\Fix&Tune.Repository.csproj", "{7A817AF9-4DB1-4783-B440-03DB3108F9FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{9822BF84-01D2-40A4-81D5-8DD5FEFC0D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9822BF84-01D2-40A4-81D5-8DD5FEFC0D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9822BF84-01D2-40A4-81D5-8DD5FEFC0D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A817AF9-4DB1-4783-B440-03DB3108F9FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A817AF9-4DB1-4783-B440-03DB3108F9FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A817AF9-4DB1-4783-B440-03DB3108F9FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A817AF9-4DB1-4783-B440-03DB3108F9FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9822BF84-01D2-40A4-81D5-8DD5FEFC0D6A} = {5F3F18ED-BCDB-47BB-9368-DA9ECDA0081F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B84639E-9D76-4F16-AD35-2F922BF65764}
