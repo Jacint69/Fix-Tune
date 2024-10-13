@@ -21,9 +21,9 @@ namespace Fix_Tune.Repository
             
             base.OnModelCreating(builder);
             builder.Entity<IdentityRole>().HasData(
-                new { Id = 1, Name = "Admin", NormalizedName = "ADMIN" },
-                new { Id = 2, Name = "Mechanic", NormalizedName = "MECHANIC" },
-                new { Id = 3, Name = "Customer", NormalizedName = "CUSTOMER" }
+                new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+                new { Id = "2", Name = "Mechanic", NormalizedName = "MECHANIC" },
+                new { Id = "3", Name = "Customer", NormalizedName = "CUSTOMER" }
                 );
 
             //Cars <--> Issue N:N CarIssue 
