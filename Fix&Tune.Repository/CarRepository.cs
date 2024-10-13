@@ -15,13 +15,13 @@ namespace Fix_Tune.Repository
 
         public override Car? Read(int id)
         {
-            return db.Cars.FirstOrDefault(x=>x.CarId==id);
+            return db.Cars.FirstOrDefault(x => x.CarId == id);
         }
 
         public override void Update(Car entity)
         {
-            var old= Read(entity.CarId);
-            var type= entity.GetType();
+            var old = Read(entity.CarId);
+            var type = entity.GetType();
             foreach (var prop in type.GetProperties())
             {
                 prop.SetValue(old, prop.GetValue(entity));
