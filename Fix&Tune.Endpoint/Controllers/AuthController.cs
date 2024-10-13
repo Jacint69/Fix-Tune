@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Fix_Tune.Endpoint.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class AuthController:ControllerBase
     {
@@ -17,6 +17,41 @@ namespace Fix_Tune.Endpoint.Controllers
         public AuthController(UserManager<User> user)
         {
             _userManager = user;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        {
+            // Ellenőrizzük a modell érvényességét
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Felhasználó létrehozása
+            var user = new User()
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateOfRegistration = DateTime.Now
+            };
+
+            // Felhasználó létrehozása az adatbázisban
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            // Ellenőrizzük, hogy a felhasználó sikeresen létrejött-e
+            if (!result.Succeeded)
+            {
+                // Ha nem, visszatérünk a hibákkal
+                return BadRequest(result.Errors);
+            }
+
+            // Hozzáadjuk a felhasználót a szerepkörhöz
+            await _userManager.AddToRoleAsync(user, "Customer");
+
+            return Ok();
         }
 
 
@@ -37,10 +72,12 @@ namespace Fix_Tune.Endpoint.Controllers
                 claims: claim, expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
+          
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    role= _userManager.GetRolesAsync(user)
                 });
             }
             return Unauthorized();
