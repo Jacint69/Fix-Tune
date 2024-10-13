@@ -41,7 +41,7 @@ namespace Fix_Tune.Repository
             //Admin user
             User user = new User()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = "admin",
                 Email = _configuration["UserSettings:Email"],
                 UserName = _configuration["UserSettings:UserName"],
                 FirstName="Kovács",
@@ -51,6 +51,15 @@ namespace Fix_Tune.Repository
 
             user.PasswordHash = passwordHasher.HashPassword(user, _configuration["UserSettings:Password"]);
             builder.Entity<User>().HasData(user);
+
+            builder.Entity<Car>().HasData(new Car()
+            {
+                CarId=1,
+                Brand = "VW",
+                Type = "Golf 4",
+                UserId = "admin",
+                Issues = null
+            }) ;
 
             //Cars <--> Issue N:N CarIssue 
             builder.Entity<Issue>()
