@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Fix_Tune.Models
@@ -17,7 +18,7 @@ namespace Fix_Tune.Models
         public string LastName { get; set; }
 
         public DateTime DateOfRegistration {  get; set; }
-
+     
         public virtual ICollection<Car> Cars { get; set; }
 
         public User()
