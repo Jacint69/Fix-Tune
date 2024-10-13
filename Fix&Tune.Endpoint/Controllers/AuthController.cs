@@ -1,4 +1,5 @@
 ﻿using Fix_Tune.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +18,22 @@ namespace Fix_Tune.Endpoint.Controllers
         public AuthController(UserManager<User> user)
         {
             _userManager = user;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetUserInfos()
+        {
+            var user = _userManager.Users.FirstOrDefault(t => t.UserName == this.User.Identity.Name);
+            var userName = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            return Ok(new
+            {
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Roles = await _userManager.GetRolesAsync(user)
+            });
         }
 
         [HttpPost]
@@ -61,23 +78,34 @@ namespace Fix_Tune.Endpoint.Controllers
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                var claim = new List<Claim> { new Claim(JwtRegisteredClaimNames.Sub, user.UserName) };
+                // List of claims to add to the token
+                var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+            new Claim(ClaimTypes.Email, user.Email), // Email claim added
+            new Claim(ClaimTypes.Name, user.FirstName), // FirstName claim added
+            new Claim(ClaimTypes.Surname, user.LastName) // LastName claim added
+        };
+
+                // Add roles as claims
                 foreach (var role in await _userManager.GetRolesAsync(user))
                 {
-                    claim.Add(new Claim(ClaimTypes.Role, role));
+                    claims.Add(new Claim(ClaimTypes.Role, role));
                 }
+
                 var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("nagyonhosszutitkoskodhelyeasdasdasd"));
                 var token = new JwtSecurityToken(
-                issuer: "http://www.security.org", audience: "http://www.security.org",
-                claims: claim, expires: DateTime.Now.AddMinutes(60),
-                signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
+                    issuer: "http://www.security.org",
+                    audience: "http://www.security.org",
+                    claims: claims, // Using the modified claims list
+                    expires: DateTime.Now.AddMinutes(60),
+                    signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
-          
+
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    role= _userManager.GetRolesAsync(user)
                 });
             }
             return Unauthorized();
