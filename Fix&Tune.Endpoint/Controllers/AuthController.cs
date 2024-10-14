@@ -24,8 +24,7 @@ namespace Fix_Tune.Endpoint.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserInfos()
         {
-            var user = _userManager.Users.FirstOrDefault(t => t.UserName == this.User.Identity.Name);
-            var userName = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            var user = _userManager.Users.FirstOrDefault(t => t.Email == (this.User.FindFirst(ClaimTypes.Email).Value));
             return Ok(new
             {
                 UserName = user.UserName,
@@ -81,9 +80,8 @@ namespace Fix_Tune.Endpoint.Controllers
                 // List of claims to add to the token
                 var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-            new Claim(ClaimTypes.Email, user.Email), // Email claim added
-            new Claim(ClaimTypes.Name, user.FirstName), // FirstName claim added
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.UserName), // UserName claim added
             new Claim(ClaimTypes.Surname, user.LastName) // LastName claim added
         };
 
