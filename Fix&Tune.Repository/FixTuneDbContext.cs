@@ -58,7 +58,7 @@ namespace Fix_Tune.Repository
                 Brand = "VW",
                 Type = "Golf 4",
                 UserId = "admin",
-                Issues = null,
+                Issues = new List<Issue>(),
                 Year=2002,
                 PlateNumber="ABB-222"
             }) ;

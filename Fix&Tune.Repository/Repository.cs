@@ -22,6 +22,7 @@ namespace Fix_Tune.Repository
         public void Delete(int id)
         {
             db.Set<T>().Remove(Read(id));
+            db.SaveChanges();
         }
 
         public abstract T Read(int id);

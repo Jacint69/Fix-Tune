@@ -20,12 +20,15 @@ namespace Fix_Tune.Models
         [Required]
         public string PlateNumber { get; set; }
 
+      //  public bool Status { get;set; }
+
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 
         [JsonIgnore]
-        public virtual User User { get; set; } 
+        [NotMapped]
+        public virtual User? User { get; set; } 
 
         [JsonIgnore]
         public virtual ICollection<Issue> Issues { get; set; }
@@ -33,6 +36,7 @@ namespace Fix_Tune.Models
         public Car()
         {
             Issues=new HashSet<Issue>();
+         //   Status = false;
         }
 
 

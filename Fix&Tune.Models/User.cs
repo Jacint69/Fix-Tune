@@ -18,7 +18,8 @@ namespace Fix_Tune.Models
         public string LastName { get; set; }
 
         public DateTime DateOfRegistration {  get; set; }
-     
+
+        
         public virtual ICollection<Car> Cars { get; set; }
 
         public User()

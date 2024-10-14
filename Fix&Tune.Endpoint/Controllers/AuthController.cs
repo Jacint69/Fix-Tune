@@ -82,6 +82,7 @@ namespace Fix_Tune.Endpoint.Controllers
         {
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim(ClaimTypes.Name, user.UserName), // UserName claim added
+            new Claim(ClaimTypes.NameIdentifier, user.Id), // UserName claim added
             new Claim(ClaimTypes.Surname, user.LastName) // LastName claim added
         };
 
