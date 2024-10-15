@@ -31,6 +31,7 @@ namespace Fix_Tune.Endpoint
 
             builder.Services.AddTransient<IRepository<CarIssue>, CarIssueRepository>();
             builder.Services.AddTransient<ICarIssueLogic, CarIssueLogic>();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
             //sql, identity
