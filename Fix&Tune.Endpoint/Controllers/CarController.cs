@@ -71,16 +71,17 @@ namespace Fix_Tune.Endpoint.Controllers
         [Authorize]
         public async Task<IActionResult> Update(Car car)
         {
-            var carOwner = car.UserId;
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var roles= await _userManager.GetRolesAsync(user);
-            if(!roles.Contains("Admin") && !roles.Contains("Mechanic") && carOwner!= user.Id)
-            {
-                return Forbid("Nincs jogosultságod!");
-            }
 
-            carLogic.Update(car);
-            return Ok();
+            if (await carLogic.CanUpdateCar(user, car))
+            {
+                carLogic.Update(car);
+                return Ok(car);
+            }
+            else
+            {
+                throw new Exception("Nem létező autó / Nincs jogosultságod!");
+            }
         }
 
         [Authorize]
