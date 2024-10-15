@@ -63,5 +63,19 @@ namespace Fix_Tune.Logic
             }
             return true;
         }
+
+        public async Task<bool> CanDeleteCar(User user, int carId)
+        {
+            var roles= await _userManager.GetRolesAsync(user);
+
+            if (!roles.Contains("Admin") && !roles.Contains("Mechanic"))
+            {
+                if (!user.Cars.Any(t=>t.CarId==carId))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
