@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Fix&amp;Tune.Models\Fix&amp;Tune.Models.csproj" />
     <ProjectReference Include="..\Fix&amp;Tune.Repository\Fix&amp;Tune.Repository.csproj" />
   </ItemGroup>
