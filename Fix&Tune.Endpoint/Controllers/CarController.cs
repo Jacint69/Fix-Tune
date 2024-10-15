@@ -36,22 +36,16 @@ namespace Fix_Tune.Endpoint.Controllers
         public async Task<Car> GetCar(int id)
         {
             //Azonosítás
-            var requestedUserName = (this.User.Identity.Name);
-            var requestedUser = await _userManager.FindByNameAsync(requestedUserName);
+            
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
 
-            //Szerepkörök
-            var roles = await _userManager.GetRolesAsync(requestedUser);
-
-            if(!roles.Contains("Admin") && !roles.Contains("Mechanic"))
+            if (!await carLogic.CanGetCar(user,id))
             {
-                var ownsCar = requestedUser.Cars.Any(t => t.CarId == id);
-                if (!ownsCar)
-                {
-                    throw new Exception("Nemlétezik ilyen autó!");
-                }
+                throw new Exception("Nincs hozzá jogosultságod!");
             }
 
-            return carLogic.Read(id);
+            var result= carLogic.Read(id);
+            return result;
 
            
         }
@@ -61,10 +55,12 @@ namespace Fix_Tune.Endpoint.Controllers
         public async Task<IActionResult> Create([FromBody] Car car)
         {
             var name = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            //TODO: ezt majd a kliens oldal küldi
             car.User = name;
             car.UserId = name.Id;
+            //
             carLogic.Create(car);
-            return Ok();
+            return Ok(car);
         }
 
         [HttpPatch]

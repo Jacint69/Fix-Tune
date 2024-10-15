@@ -9,5 +9,7 @@ namespace Fix_Tune.Logic
         Car Read(int id);
         IQueryable<Car> ReadAll();
         void Update(Car entity);
+        Task<bool> CanUpdateCar(User user, Car car);
+        Task<bool> CanGetCar(User user, int carId);
     }
 }
