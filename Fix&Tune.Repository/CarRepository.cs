@@ -15,7 +15,12 @@ namespace Fix_Tune.Repository
 
         public override Car? Read(int id)
         {
-            return db.Cars.FirstOrDefault(x => x.CarId == id);
+            var cars= db.Cars.FirstOrDefault(x => x.CarId == id);
+            if (cars==null)
+            {
+                throw new Exception("Nemtalálható autó!");
+            }
+            return cars;
         }
 
         public override void Update(Car entity)
