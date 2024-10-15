@@ -50,9 +50,7 @@ namespace Fix_Tune.Endpoint.Controllers
             var car = carLogic.Read(id);
             var carDTO = _mapper.Map<CarDTO>(car);
             return carDTO;
-           
 
-           
         }
 
         [HttpPost]
@@ -65,7 +63,7 @@ namespace Fix_Tune.Endpoint.Controllers
             car.UserId = name.Id;
             //
             carLogic.Create(car);
-            return Ok(car);
+            return Ok(_mapper.Map<CarDTO>(car));
         }
 
         [HttpPatch]
@@ -77,7 +75,7 @@ namespace Fix_Tune.Endpoint.Controllers
             if (await carLogic.CanUpdateCar(user, car))
             {
                 carLogic.Update(car);
-                return Ok(car);
+                return Ok(_mapper.Map<CarDTO>(car));
             }
             else
             {
