@@ -1,4 +1,5 @@
-﻿using Fix_Tune.Logic;
+﻿using AutoMapper;
+using Fix_Tune.Logic;
 using Fix_Tune.Models;
 using Fix_Tune.Repository;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +16,12 @@ namespace Fix_Tune.Endpoint.Controllers
     {
         ICarLogic carLogic;
         UserManager<User> _userManager { get; set; }
-        public CarController(UserManager<User> userManager, ICarLogic carLogic)
+        IMapper _mapper;
+        public CarController(UserManager<User> userManager, ICarLogic carLogic, IMapper mapper)
         {
             _userManager = userManager;
             this.carLogic = carLogic;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,7 +36,7 @@ namespace Fix_Tune.Endpoint.Controllers
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<Car> GetCar(int id)
+        public async Task<CarDTO> GetCar(int id)
         {
             //Azonosítás
             
@@ -44,8 +47,10 @@ namespace Fix_Tune.Endpoint.Controllers
                 throw new Exception("Nincs hozzá jogosultságod!");
             }
 
-            var result= carLogic.Read(id);
-            return result;
+            var car = carLogic.Read(id);
+            var carDTO = _mapper.Map<CarDTO>(car);
+            return carDTO;
+           
 
            
         }
