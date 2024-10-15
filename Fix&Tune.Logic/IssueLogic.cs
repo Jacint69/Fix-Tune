@@ -30,5 +30,9 @@ namespace Fix_Tune.Logic
         {
             return repo.ReadAll();
         }
+        public void Delete(int id)
+        {
+            repo.Delete(id);
+        }
     }
 }

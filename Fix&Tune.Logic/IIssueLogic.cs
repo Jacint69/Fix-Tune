@@ -8,5 +8,6 @@ namespace Fix_Tune.Logic
         Issue Read(int id);
         IQueryable<Issue> ReadAll();
         void Update(Issue entity);
+        void Delete(int id);
     }
 }
