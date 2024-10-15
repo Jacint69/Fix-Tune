@@ -25,7 +25,7 @@ namespace Fix_Tune.Endpoint.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Mechanic")]
         public IEnumerable<Car> GetCars()
         {
 
@@ -66,7 +66,7 @@ namespace Fix_Tune.Endpoint.Controllers
             return Ok(_mapper.Map<CarDTO>(car));
         }
 
-        [HttpPatch]
+        [HttpPut]
         [Authorize]
         public async Task<IActionResult> Update(Car car)
         {
@@ -88,19 +88,10 @@ namespace Fix_Tune.Endpoint.Controllers
         
         public async Task<IActionResult> Delete(int id)
         {
-            var requestedUserName = this.User.Identity.Name;
-            var user = await _userManager.FindByNameAsync(requestedUserName);
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            var car = carLogic.Read(id);
-
-            if (!roles.Contains("Admin") && !roles.Contains("Mechanic"))
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            if (!await carLogic.CanDeleteCar(user,id))
             {
-                if (!user.Cars.Any(t=>t.CarId==id))
-                {
-                    return Forbid("Nincs jogosultságod");
-                }
+                throw new Exception("Jogosulatlan kérés/Nem található autó!");
             }
 
             carLogic.Delete(id);
