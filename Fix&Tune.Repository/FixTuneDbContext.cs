@@ -77,6 +77,8 @@ namespace Fix_Tune.Repository
             customer.PasswordHash = passwordHasher.HashPassword(admin, _configuration["UserSettings:Password"]);
 
             builder.Entity<User>().HasData(admin);
+            builder.Entity<User>().HasData(mechanic);
+            builder.Entity<User>().HasData(customer);
 
             builder.Entity<Car>().HasData(new Car()
             {
