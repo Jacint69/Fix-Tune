@@ -80,16 +80,166 @@ namespace Fix_Tune.Repository
             builder.Entity<User>().HasData(mechanic);
             builder.Entity<User>().HasData(customer);
 
-            builder.Entity<Car>().HasData(new Car()
-            {
-                CarId=2,
-                Brand = "VW",
-                Type = "Golf 4",
-                UserId = "admin",
-                Issues = new List<Issue>(),
-                Year=2002,
-                PlateNumber="ABB-222"
-            }) ;
+            builder.Entity<Car>().HasData(
+                                     new Car
+                                     {
+                                         CarId = 1,
+                                         Brand = "VW",
+                                         Type = "Golf 4",
+                                         UserId = "admin",
+                                         Issues = new List<Issue>(),
+                                         Year = 2002,
+                                         PlateNumber = "ABB-222",
+                                         TypeOfFuel = TypeOfFuel.Diesel,
+                                         EngineDisplacement = 1.9,
+                                         Status = false
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 2,
+                                         Brand = "Ford",
+                                         Type = "Focus",
+                                         UserId = "mechanic",
+                                         Issues = new List<Issue>(),
+                                         Year = 2008,
+                                         PlateNumber = "CDE-333",
+                                         TypeOfFuel = TypeOfFuel.Petrol,
+                                         EngineDisplacement = 1.6,
+                                         Status = true
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 3,
+                                         Brand = "BMW",
+                                         Type = "3 Series",
+                                         UserId = "customer",
+                                         Issues = new List<Issue>(),
+                                         Year = 2015,
+                                         PlateNumber = "FGH-444",
+                                         TypeOfFuel = TypeOfFuel.Diesel,
+                                         EngineDisplacement = 2.0,
+                                         Status = false
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 4,
+                                         Brand = "Audi",
+                                         Type = "A4",
+                                         UserId = "admin",
+                                         Issues = new List<Issue>(),
+                                         Year = 2010,
+                                         PlateNumber = "HIJ-555",
+                                         TypeOfFuel = TypeOfFuel.Petrol,
+                                         EngineDisplacement = 1.8,
+                                         Status = true
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 5,
+                                         Brand = "Mercedes",
+                                         Type = "C-Class",
+                                         UserId = "mechanic",
+                                         Issues = new List<Issue>(),
+                                         Year = 2017,
+                                         PlateNumber = "JKL-666",
+                                         TypeOfFuel = TypeOfFuel.Diesel,
+                                         EngineDisplacement = 2.1,
+                                         Status = false
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 6,
+                                         Brand = "Toyota",
+                                         Type = "Corolla",
+                                         UserId = "customer",
+                                         Issues = new List<Issue>(),
+                                         Year = 2020,
+                                         PlateNumber = "MNO-777",
+                                         TypeOfFuel = TypeOfFuel.Petrol,
+                                         EngineDisplacement = 1.6,
+                                         Status = true
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 7,
+                                         Brand = "Honda",
+                                         Type = "Civic",
+                                         UserId = "admin",
+                                         Issues = new List<Issue>(),
+                                         Year = 2012,
+                                         PlateNumber = "PQR-888",
+                                         TypeOfFuel = TypeOfFuel.Diesel,
+                                         EngineDisplacement = 1.6,
+                                         Status = false
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 8,
+                                         Brand = "Opel",
+                                         Type = "Astra",
+                                         UserId = "mechanic",
+                                         Issues = new List<Issue>(),
+                                         Year = 2013,
+                                         PlateNumber = "STU-999",
+                                         TypeOfFuel = TypeOfFuel.Petrol,
+                                         EngineDisplacement = 1.4,
+                                         Status = true
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 9,
+                                         Brand = "Mazda",
+                                         Type = "6",
+                                         UserId = "customer",
+                                         Issues = new List<Issue>(),
+                                         Year = 2014,
+                                         PlateNumber = "VWX-111",
+                                         TypeOfFuel = TypeOfFuel.Diesel,
+                                         EngineDisplacement = 2.2,
+                                         Status = false
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 10,
+                                         Brand = "Skoda",
+                                         Type = "Octavia",
+                                         UserId = "admin",
+                                         Issues = new List<Issue>(),
+                                         Year = 2009,
+                                         PlateNumber = "YZA-222",
+                                         TypeOfFuel = TypeOfFuel.Petrol,
+                                         EngineDisplacement = 1.6,
+                                         Status = true
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 11,
+                                         Brand = "Nissan",
+                                         Type = "Qashqai",
+                                         UserId = "mechanic",
+                                         Issues = new List<Issue>(),
+                                         Year = 2016,
+                                         PlateNumber = "BCD-333",
+                                         TypeOfFuel = TypeOfFuel.Diesel,
+                                         EngineDisplacement = 1.5,
+                                         Status = false
+                                     },
+                                     new Car
+                                     {
+                                         CarId = 12,
+                                         Brand = "Kia",
+                                         Type = "Sportage",
+                                         UserId = "customer",
+                                         Issues = new List<Issue>(),
+                                         Year = 2021,
+                                         PlateNumber = "EFG-444",
+                                         TypeOfFuel = TypeOfFuel.Petrol,
+                                         EngineDisplacement = 1.6,
+                                         Status = true
+                                     }
+                                 );
+
+
 
             //Cars <--> Issue N:N CarIssue 
             builder.Entity<Issue>()
