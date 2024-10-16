@@ -230,6 +230,12 @@ namespace Fix_Tune.Repository.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Type = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    PlateNumber = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TypeOfFuel = table.Column<int>(type: "int", nullable: false),
+                    EngineDisplacement = table.Column<double>(type: "double", nullable: false),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -285,12 +291,31 @@ namespace Fix_Tune.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfRegistration", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "admin", 0, "ff91ced7-2c7c-4ef4-bb00-f7018e832dd6", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "kovacs.jacint02@gmail.com", false, "Kovács", "Jácint", false, null, null, "Jaco", "AQAAAAIAAYagAAAAEAn/+u+3IUjAH0gaspzhPm2dmJgVpZij8p8S1P5H1ONnyDg/cVKCb7VCtiqAZF/+jg==", null, false, "2f6437fa-10a6-4401-9253-3e7f8657d7c3", false, "Jaco" });
+                values: new object[,]
+                {
+                    { "admin", 0, "be96f9ac-e233-4eda-bde7-30c52d55e15f", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "kovacs.jacint02@gmail.com", false, "Kovács", "Jácint", false, null, null, "Jaco", "AQAAAAIAAYagAAAAEFYv5+jlEBHXVD5oPPlGBXDyGpzTO8m5b0qcH/9CjG6FJl2CxdQm7qyOOQeIO/MsMA==", null, false, "10e97100-14f4-4da7-832e-b1a356fce4df", false, "Jaco" },
+                    { "customer", 0, "198a2980-87e0-42f8-95f0-e6652501d245", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "customer@customer.com", false, "Kovács", "Jácint", false, null, null, "CUSTOMER", "AQAAAAIAAYagAAAAEAmwmqb9Q7WtXTJUAsZpOha0dKIWoWYnJIayUFRpHsLJ6/hJigiFd6hf25MYOnDWwA==", null, false, "52a78ecc-0581-4605-a038-cb7660a50228", false, "customer" },
+                    { "mechanic", 0, "7b6cddbf-f31e-44ca-b46c-481b1aa2a2f7", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "mechanic@mechanic.com", false, "Kovács", "Jácint", false, null, null, "MECHANIC", "AQAAAAIAAYagAAAAEAL+uSzepAzyGD/OQPPqmB47f3J6bQu+UYgyyTob4KedFNhYr/15jfzvQVFLxTrubw==", null, false, "75923553-bead-4683-8ac4-dc444cd759f3", false, "mechanic" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "CarId", "Brand", "Type", "UserId" },
-                values: new object[] { 1, "VW", "Golf 4", "admin" });
+                columns: new[] { "CarId", "Brand", "EngineDisplacement", "PlateNumber", "Status", "Type", "TypeOfFuel", "UserId", "Year" },
+                values: new object[,]
+                {
+                    { 1, "VW", 1.8999999999999999, "ABB-222", false, "Golf 4", 1, "admin", 2002 },
+                    { 2, "Ford", 1.6000000000000001, "CDE-333", true, "Focus", 0, "mechanic", 2008 },
+                    { 3, "BMW", 2.0, "FGH-444", false, "3 Series", 1, "customer", 2015 },
+                    { 4, "Audi", 1.8, "HIJ-555", true, "A4", 0, "admin", 2010 },
+                    { 5, "Mercedes", 2.1000000000000001, "JKL-666", false, "C-Class", 1, "mechanic", 2017 },
+                    { 6, "Toyota", 1.6000000000000001, "MNO-777", true, "Corolla", 0, "customer", 2020 },
+                    { 7, "Honda", 1.6000000000000001, "PQR-888", false, "Civic", 1, "admin", 2012 },
+                    { 8, "Opel", 1.3999999999999999, "STU-999", true, "Astra", 0, "mechanic", 2013 },
+                    { 9, "Mazda", 2.2000000000000002, "VWX-111", false, "6", 1, "customer", 2014 },
+                    { 10, "Skoda", 1.6000000000000001, "YZA-222", true, "Octavia", 0, "admin", 2009 },
+                    { 11, "Nissan", 1.5, "BCD-333", false, "Qashqai", 1, "mechanic", 2016 },
+                    { 12, "Kia", 1.6000000000000001, "EFG-444", true, "Sportage", 0, "customer", 2021 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
