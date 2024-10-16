@@ -39,18 +39,44 @@ namespace Fix_Tune.Repository
 
 
             //Admin user
-            User user = new User()
+            User admin = new User()
             {
                 Id = "admin",
                 Email = _configuration["UserSettings:Email"],
                 UserName = _configuration["UserSettings:UserName"],
                 FirstName="Kovács",
                 LastName="Jácint",
-                NormalizedUserName = _configuration["UserSettings:NormalizedUserName"]
+                NormalizedUserName = _configuration["UserSettings:NormalizedUserName"],
+                
+            };
+            User mechanic = new User()
+            {
+                Id = "mechanic",
+                Email = "mechanic@mechanic.com",
+                UserName = "mechanic",
+                FirstName = "Kovács",
+                LastName = "Jácint",
+                NormalizedUserName = "MECHANIC",
+
             };
 
-            user.PasswordHash = passwordHasher.HashPassword(user, _configuration["UserSettings:Password"]);
-            builder.Entity<User>().HasData(user);
+            User customer = new User()
+            {
+                Id = "customer",
+                Email = "customer@customer.com",
+                UserName = "customer",
+                FirstName = "Kovács",
+                LastName = "Jácint",
+                NormalizedUserName = "CUSTOMER",
+
+            };
+
+
+            admin.PasswordHash = passwordHasher.HashPassword(admin, _configuration["UserSettings:Password"]);
+            mechanic.PasswordHash = passwordHasher.HashPassword(admin, _configuration["UserSettings:Password"]);
+            customer.PasswordHash = passwordHasher.HashPassword(admin, _configuration["UserSettings:Password"]);
+
+            builder.Entity<User>().HasData(admin);
 
             builder.Entity<Car>().HasData(new Car()
             {
