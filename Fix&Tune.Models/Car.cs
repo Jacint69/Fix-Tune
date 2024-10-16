@@ -4,6 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace Fix_Tune.Models
 {
+    public enum TypeOfFuel
+    {
+        Petrol=0, Diesel=1
+    }
     [Table("Cars")]
     public class Car
     {
@@ -20,7 +24,12 @@ namespace Fix_Tune.Models
         [Required]
         public string PlateNumber { get; set; }
 
-      //  public bool Status { get;set; }
+        public bool Status { get;set; }
+
+        public TypeOfFuel TypeOfFuel { get; set; }
+        
+        //Lökettérfogat(1.6, 1.9)
+        public double EngineDisplacement { get; set; }
 
         [Required]
         [ForeignKey(nameof(User))]
@@ -36,7 +45,7 @@ namespace Fix_Tune.Models
         public Car()
         {
             Issues=new HashSet<Issue>();
-         //   Status = false;
+            Status = false;
         }
 
 
