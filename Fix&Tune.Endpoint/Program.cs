@@ -34,6 +34,7 @@ namespace Fix_Tune.Endpoint
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
+
             //sql, identity
             string conn = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -74,6 +75,16 @@ namespace Fix_Tune.Endpoint
                 };
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLiveServer", policy =>
+                {
+                    policy.WithOrigins("http://127.0.0.1:5500")  // A Live Server URL-je
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
 
             var app = builder.Build();
 
@@ -84,9 +95,10 @@ namespace Fix_Tune.Endpoint
                 app.UseSwaggerUI();
             }
 
+            //app.UseCors(opt => opt.AllowCredentials().AllowAnyMethod().AllowAnyHeader().WithOrigins("http://127.0.0.1:5500"));
+            app.UseCors("AllowLiveServer");
             app.UseAuthentication();
             app.UseAuthorization();
-
 
 
             app.MapControllers();
