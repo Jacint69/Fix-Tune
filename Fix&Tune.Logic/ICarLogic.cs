@@ -12,5 +12,6 @@ namespace Fix_Tune.Logic
         Task<bool> CanUpdateCar(User user, Car car);
         Task<bool> CanGetCar(User user, int carId);
         Task<bool> CanDeleteCar(User user, int carId);
+        Task<List<Car>> OwnedCars(User user);
     }
 }

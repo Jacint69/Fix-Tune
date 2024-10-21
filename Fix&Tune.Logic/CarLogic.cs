@@ -77,5 +77,11 @@ namespace Fix_Tune.Logic
             }
             return true;
         }
+
+        public async Task<List<Car>> OwnedCars(User user)
+        {
+           return ReadAll().Where(x=>x.UserId==user.Id).ToList();
+        }
+
     }
 }
