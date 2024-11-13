@@ -12,6 +12,9 @@ namespace Fix_Tune.Repository
         public DbSet<Car> Cars { get; set; }
         public DbSet<Issue> Issues { get; set; }
         public DbSet<CarIssue> CarIssues {  get; set; }
+        
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<User> Users {  get; set; }
 
         private  IConfiguration _configuration;
@@ -263,6 +266,12 @@ namespace Fix_Tune.Repository
                 .HasOne(x=>x.User)
                 .WithMany(x=> x.Cars)
                 .HasForeignKey(x=>x.UserId);
+
+            builder.Entity<Discount>()
+                .HasOne(x => x.Service)
+                .WithOne(x => x.Discount)
+                .HasForeignKey<Discount>(x => x.ServiceId);
+
 
 
         }
