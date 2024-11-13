@@ -17,6 +17,7 @@ namespace Fix_Tune.Endpoint.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Mechanic")]
         public IEnumerable<CarIssue> CarIssues()
         {
             return carIssueLogic.ReadAll();
@@ -39,6 +40,13 @@ namespace Fix_Tune.Endpoint.Controllers
         {
             carIssueLogic.Delete(id);
             return Ok("Deleted: " + id);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCarIssue([FromBody] CarIssue carIssue)
+        {
+            carIssueLogic.Create(carIssue);
+            return Ok(carIssue);
         }
     }
 }
