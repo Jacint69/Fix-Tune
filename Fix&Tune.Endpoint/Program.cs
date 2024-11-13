@@ -23,6 +23,7 @@ namespace Fix_Tune.Endpoint
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
             builder.Services.AddTransient<IRepository<Car>, CarRepository>();
             builder.Services.AddTransient<ICarLogic, CarLogic>();
 
@@ -31,6 +32,18 @@ namespace Fix_Tune.Endpoint
 
             builder.Services.AddTransient<IRepository<CarIssue>, CarIssueRepository>();
             builder.Services.AddTransient<ICarIssueLogic, CarIssueLogic>();
+            builder.Services.AddTransient<IMechanicLogic, MechanicLogic>();
+            builder.Services.AddTransient<IRepository<Service>,  ServiceRepository>();
+            builder.Services.AddTransient<IServiceLogic, ServiceLogic>();
+
+            builder.Services.AddTransient<IRepository<Discount>, DiscountRepository>();
+            builder.Services.AddTransient<IDiscountLogic, DiscountLogic>();
+
+            builder.Services.AddTransient<IRepository<Workshop>, WorkshopRepository>();
+            builder.Services.AddTransient<IWorkshopLogic, WorkshopLogic>();
+
+            builder.Services.AddTransient<IRepository<TuningPart>, TuningPartRepository>();
+            builder.Services.AddTransient<ITuningPartLogic, TuningPartLogic>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
