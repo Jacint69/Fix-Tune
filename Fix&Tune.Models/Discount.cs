@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fix_Tune.Models
 {
-    internal class Discount
+    public class Discount
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

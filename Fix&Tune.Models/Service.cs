@@ -20,6 +20,7 @@ namespace Fix_Tune.Models
         public string Description { get; set; }
         [Required]
         public int Price { get; set; }
+        public virtual Discount Discount { get; set; }
 
 
     }
