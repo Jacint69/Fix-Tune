@@ -1,5 +1,6 @@
 ﻿using Fix_Tune.Logic;
 using Fix_Tune.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -33,12 +34,14 @@ namespace Fix_Tune.Endpoint.Controllers
         }
 
         // POST api/<TuningPartController>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void Post([FromBody] TuningPart value)
         {
             logic.Create(value);
         }
 
+        [Authorize(Roles = "Admin")]
         // PUT api/<TuningPartController>/5
         [HttpPut]
         public void Put([FromBody] TuningPart value)
@@ -47,6 +50,7 @@ namespace Fix_Tune.Endpoint.Controllers
         }
 
         // DELETE api/<TuningPartController>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
