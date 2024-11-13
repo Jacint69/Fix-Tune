@@ -15,6 +15,8 @@ namespace Fix_Tune.Repository
         
         public DbSet<Service> Services { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Workshop> Workshops { get; set; }
+        public DbSet<TuningPart> TuningParts { get; set; }
         public virtual DbSet<User> Users {  get; set; }
 
         private  IConfiguration _configuration;
