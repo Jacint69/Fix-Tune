@@ -24,7 +24,7 @@ namespace Fix_Tune.Endpoint.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserInfos()
         {
-            var user = _userManager.Users.FirstOrDefault(t => t.Email == (this.User.FindFirst(ClaimTypes.Email).Value));
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             return Ok(new
             {
                 UserName = user.UserName,
@@ -105,6 +105,7 @@ namespace Fix_Tune.Endpoint.Controllers
                     expires: DateTime.Now.AddMinutes(240),
                     signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                 );
+
 
                 return Ok(new
                 {
