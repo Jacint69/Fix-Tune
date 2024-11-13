@@ -2,7 +2,7 @@
 
 namespace Fix_Tune.Logic
 {
-    internal interface IDiscountLogic
+    public interface IDiscountLogic
     {
         void Create(Discount entity);
         void Delete(int id);

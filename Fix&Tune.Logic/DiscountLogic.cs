@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fix_Tune.Logic
 {
-    internal class DiscountLogic : IDiscountLogic
+    public class DiscountLogic : IDiscountLogic
     {
         IRepository<Discount> repo;
         public DiscountLogic(IRepository<Discount> repo)

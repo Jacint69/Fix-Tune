@@ -2,7 +2,7 @@
 
 namespace Fix_Tune.Logic
 {
-    internal interface IServiceLogic
+    public interface IServiceLogic
     {
         void Create(Service entity);
         void Delete(int id);

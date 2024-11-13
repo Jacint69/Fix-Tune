@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fix_Tune.Logic
 {
-    internal class ServiceLogic : IServiceLogic
+    public class ServiceLogic : IServiceLogic
     {
         IRepository<Service> repo;
         public ServiceLogic(IRepository<Service> repo)
