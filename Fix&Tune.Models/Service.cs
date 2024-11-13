@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Fix_Tune.Models
@@ -20,7 +21,9 @@ namespace Fix_Tune.Models
         public string Description { get; set; }
         [Required]
         public int Price { get; set; }
-        public virtual Discount Discount { get; set; }
+
+        [JsonIgnore]
+        public virtual Discount? Discount { get; set; }
 
 
     }
